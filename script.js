@@ -67,7 +67,7 @@ let currentSlide = 0;
 let autoSlide;
 
 if(partnerTrack && nextBtn && prevBtn && wrapper && window.innerWidth > 900){
-
+	
     const cards = document.querySelectorAll(".partner-card");
 
     function getGap(){
