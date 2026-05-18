@@ -56,16 +56,17 @@ if(hero && window.innerWidth > 900){
 
 /* PARTNER SLIDER */
 
+/* PARTNER SLIDER */
+
 const partnerTrack = document.querySelector(".partner-track");
 const nextBtn = document.querySelector(".next");
 const prevBtn = document.querySelector(".prev");
 const wrapper = document.querySelector(".partner-track-wrapper");
-const slider = document.querySelector(".partner-slider");
 
 let currentSlide = 0;
 let autoSlide;
 
-if(partnerTrack && nextBtn && prevBtn && wrapper){
+if(partnerTrack && nextBtn && prevBtn && wrapper && window.innerWidth > 900){
 
     const cards = document.querySelectorAll(".partner-card");
 
@@ -75,7 +76,7 @@ if(partnerTrack && nextBtn && prevBtn && wrapper){
     }
 
     function getStep(){
-         return wrapper.offsetWidth;
+        return cards[0].offsetWidth + getGap();
     }
 
     function getVisibleCards(){
@@ -87,45 +88,26 @@ if(partnerTrack && nextBtn && prevBtn && wrapper){
     }
 
     function updateSlider(){
-        const maxSlide = getMaxSlide();
-
-        if(currentSlide > maxSlide){
-            currentSlide = 0;
-        }
-
-        if(currentSlide < 0){
-            currentSlide = maxSlide;
-        }
-
         partnerTrack.style.transform = `translateX(-${currentSlide * getStep()}px)`;
     }
 
     function goNext(){
         const maxSlide = getMaxSlide();
-
         currentSlide = currentSlide >= maxSlide ? 0 : currentSlide + 1;
-
         updateSlider();
     }
 
     function goPrev(){
         const maxSlide = getMaxSlide();
-
         currentSlide = currentSlide <= 0 ? maxSlide : currentSlide - 1;
-
         updateSlider();
     }
 
     nextBtn.addEventListener("click", goNext);
     prevBtn.addEventListener("click", goPrev);
 
-    function startAutoSlide(){
-        stopAutoSlide();
-
-        autoSlide = setInterval(() => {
-            goNext();
-        }, 3500);
-    }
+    autoSlide = setInterval(goNext, 3500);
+}
 
     function stopAutoSlide(){
         clearInterval(autoSlide);
