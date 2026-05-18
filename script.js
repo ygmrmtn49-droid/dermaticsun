@@ -75,8 +75,7 @@ if(partnerTrack && nextBtn && prevBtn && wrapper){
     }
 
     function getStep(){
-        const card = cards[0];
-        return card.offsetWidth + getGap();
+         return wrapper.offsetWidth;
     }
 
     function getVisibleCards(){
